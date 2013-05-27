@@ -1,0 +1,68 @@
+<% include header %>
+<% include navbar %>
+
+<div class="container">
+	<div id="leftContainer">
+		<div id="left1">
+			<h3>My Current Courses</h3>
+			<ul>
+			<% for (var i=0; i<courses.length; i++) { %>
+				<li><a href="/course/<%= courses[i].cid %>"><%= courses[i].semester %> - <%= courses[i].code %></a></li>
+			<% } %>
+			</ul>
+		</div>
+		<div id="left2">
+			<h3>Trending</h3>
+			<ul>
+				<li>#homework1</li>
+				<li>#326</li>
+				<li>#326_lecture1</li>
+				<li>#jquery_woes</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="rightContainer">
+		<div id="noteList">
+			<h3>Timeline</h3>
+			<% for (var i=notes.length-1; i >= 0; i--) { %>
+				<div class="note" id="nid_<%= notes[i].nid %>">
+					<b><%= notes[i].name %> <a href="/profile/<%= notes[i].username %>">@<%= notes[i].username %></a></b><br>
+					<div class="noteMsg">
+						<% if ((notes[i].ques === true) && (notes[i].convo === null)){ %>
+							<font color="red">
+						<% } else { %>
+							<font color = "black">
+						<% } %>
+						<% var msg = notes[i].message %><% msg = msg.split(" ") %>
+						<% for (var j=0; j < msg.length; j++) { %>
+							<% if (msg[j].charAt(0) === "@" && msg[j].split("\@").length === 2) { var word = msg[j].substring(1); %>
+								<a href="/profile/<%= word %>"> <%= msg[j] %></a> 
+							<% } else if (msg[j].charAt(0) === "#" && msg[j].split("\#").length === 2) { var word = msg[j].substring(1); %>
+								<a href="/searchN/<%= word %>"> <%= msg[j] %></a> 
+							<% } else { %>
+								<%= msg[j] %>
+							<% } %>
+						<% } %>
+						</font>
+						<br>
+					</div>
+					<div class="noteDetails">
+						<%= notes[i].date %> | <a class="codeTag" name="<notes[i].code" href="/course/<%= notes[i].cid %>"><%= notes[i].code %></a> | <a href="#">Detail</a> | <a href="#">Reply</a>
+						<% if (loggedInUser === notes[i].username) { %>
+							 | <a class="delete" id="<%= notes[i].nid %>" href=>Delete</a>
+						<% } %>
+					</div>
+				</div>
+			<% } %>
+		</div>
+	</div>
+	
+</div>
+
+<script src="/javascripts/notes.js"> </script>
+<script>
+	deleteN();
+</script>
+
+<% include footer %>

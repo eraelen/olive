@@ -1,0 +1,44 @@
+<% include header %>
+<% include navbar %>
+
+<div class="container">
+	<div id="leftContainer">
+		<div id="left1">
+			<h3><a href="/searchN/<%= searchPhrase %>">Notes</a></h3>
+			<hr>
+			<h3>People</h3> <br>
+		</div>
+		<div id="left2">
+			<h3>Trending</h3>
+			<ul>
+				<li>#homework1</li>
+				<li>#326</li>
+				<li>#326_lecture1</li>
+				<li>#jquery_woes</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="rightContainer">
+		<div id="usersList">
+			<h3>Results for "<%= searchPhrase %>" :</h3>
+			<% if (users.length > 0) { %>
+				<% for (var i=0; i < users.length; i++) { %>
+					<div class= "userSearchResult">
+						<%= users[i].name %> <a href="/profile/<%= users[i].username %>"> @<%= users[i].username %> </a>
+					</div>
+				<% } %>
+			<% } else { %>
+				<p> No results found. </p>
+			<% } %>
+		</div>
+	</div>
+	
+</div>
+
+<script src="/javascripts/notes.js"> </script>
+<script>
+	deleteN();
+</script>
+
+<% include footer %>

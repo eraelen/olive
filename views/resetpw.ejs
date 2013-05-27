@@ -1,0 +1,19 @@
+<% include header %>
+<% include navbar %>
+
+<div>
+	<center>
+		<div><font color="red"><%= message %></font></div>
+		<br>	
+		<h3>Reset Password</h3>
+		<br>
+		<br>
+		<form method="post" action="/resetpwProcess">
+			<input class="span2" type="password" placeholder="New Password" name="password1"> <br>
+			<input class="span2" type="password" placeholder="Retype Password" name="password2"> <br>
+			<button type="submit" class="btn">Submit</button><br>
+		</form>
+	</center>
+</div>
+
+<% include footer %>

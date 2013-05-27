@@ -1,0 +1,44 @@
+<% include header %>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+			<div class="nav-collapse collapse">					
+				<form class="navbar-form pull-right" method="post" action="/userAuth">
+					<input class="span2" type="email" placeholder="Email" name="loginEmail">
+					<input class="span2" type="password" placeholder="Password" name="password">
+					<button type="submit" class="btn">Sign in</button><br>
+					<a href="/forgotpw">Forgot Password?</a>
+				</form>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div>
+	<center>
+		<br>
+		<div><font color="red"><%= message %></font></div>
+		<br>
+		<h3>No password yet?</h3>
+		Enter your email address below. <br>
+		This email address should be the same one you use for Moodle and Spire access. <br>
+		Questions? Ask your instructional staff. <br>
+		<br>
+		<form method="post" action="/createpw">
+			Email: <input type="email" name="regEmail"><br>
+			<button type="submit" class="btn">Get Password</button><br>
+		</form>
+	</center>
+</div>
+
+<div class="splash">
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus metus vel lectus placerat aliquet. Integer eu justo felis. Pellentesque tincidunt posuere mauris, ut commodo nibh vehicula sed. Vivamus molestie rutrum metus, eget aliquam neque vestibulum quis. Aenean nec justo vitae libero auctor lobortis sed a sem. Praesent fringilla purus id purus porta laoreet. Nulla molestie vestibulum ipsum, hendrerit scelerisque massa tristique a. Mauris at tellus ut lectus ultricies tristique. Nam eget gravida odio. Maecenas placerat iaculis blandit. Nulla vulputate dolor at leo vehicula condimentum. Fusce id arcu quam. Integer at lorem eget nisl pharetra euismod. Sed molestie metus consequat diam dictum consequat. Vestibulum vel orci eget erat auctor rutrum. Aliquam et nulla ac nisl gravida posuere at non odio. 
+	</p>
+</div>
+
+
+<% include footer %>
+
+

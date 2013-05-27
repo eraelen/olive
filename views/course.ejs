@@ -1,0 +1,99 @@
+<% include header %>
+<% include navbar %>
+
+<div class="container">
+	<div id="leftContainer">
+		<div id="left1">
+			<h3>Semester:</h3>
+			<%= courseSem %>
+			<h3>Course:</h3>
+			<%= courseCode %> <br>
+			<%= courseTitle %> <br>
+		</div>
+		<div id="left2">
+			<h3>Lectures:</h3>
+			<ul>
+			<% for (var i=0; i<lectures.length; i++) { %>
+				<li><a href="/lecture/<%= lectures[i].cid %>/<%= lectures[i].lid %>"><%= lectures[i].date %> - Lecture <%= lectures[i].number %></a></li>
+			<% } %>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="rightContainer">
+		<div id="composeNote">
+			<form method="post" id="compose" action"">
+				<textarea name="<%= courseCID %>_<%= lectureLID %>" class="form-textarea-size" > </textarea>
+				<br>
+				<label><input type="checkbox" id="question" value="question" /> This is a question </label>
+				<input type="submit" id="noteSubmit" name="submit" value="Submit" style="float:right; margin-right:20px"/>
+			</form>
+		</div>
+		<div id="noteList">
+			<% for (var i=notes.length-1; i >= 0; i--) { %>
+				<div class="note" id="nid_<%= notes[i].nid %>">
+					<b><%= notes[i].name %> <a href="/profile/<%= notes[i].username %>">@<%= notes[i].username %></a></b><br>
+					<div class="noteMsg">
+						<% if ((notes[i].ques === true) && (notes[i].convo === null)){ %>
+							<font color="red">
+						<% } else { %>
+							<font color = "black">
+						<% } %>
+						<% var msg = notes[i].message %><% msg = msg.split(" ") %>
+						<% for (var j=0; j < msg.length; j++) { %>
+							<% if (msg[j].charAt(0) === "@" && msg[j].split("\@").length === 2) { var word = msg[j].substring(1); %>
+								<a href="/profile/<%= word %>"> <%= msg[j] %></a> 
+							<% } else if (msg[j].charAt(0) === "#" && msg[j].split("\#").length === 2) { var word = msg[j].substring(1); %>
+								<a href="/searchN/<%= word %>"> <%= msg[j] %></a> 
+							<% } else { %>
+								<%= msg[j] %>
+							<% } %>
+						<% } %>
+						</font>
+						<br>
+					</div>
+					<div class="noteDetails">
+						<%= notes[i].date %> | <a class="codeTag" name="<notes[i].code" href="/course/<%= notes[i].cid %>"><%= notes[i].code %></a> | <a href="#">Detail</a> 
+						| <a data-toggle="modal" data-target="#replyModal">Reply</a>
+						<!-- Modal -->
+<div id="replyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">Reply</h3>
+	</div>
+	<div class="modal-body">
+		<p>This will be original note</p>
+		<hr>
+		<div id="composeNote">
+			<form method="post" id="compose" action"">
+				<textarea name="<%= courseCID %>_<%= lectureLID %>" class="form-textarea-size" > </textarea>
+				<br>
+				<label><input type="checkbox" id="question" value="question" /> This is a question </label>
+				<input type="submit" id="noteSubmit" name="submit" value="Submit" style="float:right; margin-right:20px"/>
+			</form>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary">Submit</button>
+	</div>
+</div>
+						<% if (loggedInUser === notes[i].username) { %>
+							 | <a class="delete" id="<%= notes[i].nid %>" href=>Delete</a>
+						<% } %>					
+					</div>
+				</div>
+			<% } %>
+		</div>
+	</div>
+</div>
+
+
+
+<script src="/javascripts/notes.js"> </script>
+<script>
+	deleteN();
+	createN();
+</script>
+
+<% include footer %>

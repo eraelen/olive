@@ -1,0 +1,27 @@
+<% include header %>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+			<div class="nav-collapse collapse">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div>
+	<center>
+		<div><font color="red"><%= message %></font></div>
+		<br>	
+		<h3>Forgot your password?</h3>
+		Enter your email address below. A link will be sent to you to reset your password.
+		<br>
+		<br>
+		<form method="post" action="/forgotpwProcess">
+			E-mail: <input type="email" name="email"/><br/>
+			<button type="submit" class="btn">Reset Password</button><br>
+		</form>
+	</center>
+</div>
+
+<% include footer %>
