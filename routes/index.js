@@ -144,6 +144,7 @@ exports.createNote = function(req, res) {
 		console.log("convo - " + newNote.convo);
 		console.log("test - " + ((newNote.ques === true) && (newNote.convo === null)));
 		console.log("reply - " + newNote.reply);
+		//NOTE: need to add lecture id to each note
 		res.json(newNote);
 	}
 };

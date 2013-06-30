@@ -17,7 +17,7 @@ var createNote = function (msg, cid, lid, ques, reply) {
 		url: '/createNote',
 		data: {msg : msg, cid: cid, lid: lid, ques: ques, reply: reply},
 		success: function (note) {
-			$('#noteList').prepend(addNoteHTML(note));
+			$('#noteList').prepend(addNoteHTML(note, 'null'));
 			deleteN();
 		}
 		}).done(function(msg) {
@@ -51,6 +51,7 @@ function createN() {
 		});
 }
 
+//need to change replySubmit from id to class
 function createReply() {
 	$('#replySubmit').bind('click',
 		function (event) {
