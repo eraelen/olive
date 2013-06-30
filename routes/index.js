@@ -136,8 +136,14 @@ exports.createNote = function(req, res) {
 		req.flash('userAuth', 'Not logged in!');
 		res.redirect('/');
 	} else {
-		console.log("req.body.ques" + req.body.ques);
-		var newNote = notes.createNote(loggedInUser.uid, req.body.msg, parseInt(req.body.cid), Boolean(req.body.ques));
+		console.log("uid - " + loggedInUser.uid);
+		console.log("msg - " + req.body.msg);
+		console.log("cid - " + req.body.cid);
+		console.log("ques - " + (req.body.ques === "true"));
+		var newNote = notes.createNote(loggedInUser.uid, req.body.msg, parseInt(req.body.cid), (req.body.ques === "true"), req.body.reply);
+		console.log("convo - " + newNote.convo);
+		console.log("test - " + ((newNote.ques === true) && (newNote.convo === null)));
+		console.log("reply - " + newNote.reply);
 		res.json(newNote);
 	}
 };

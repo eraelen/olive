@@ -3,7 +3,7 @@ function addNoteHTML (note) {
 	var msg = note.message.split(" ");
 	content += 	'<div class="note" id="nid_' + note.nid + '">'
 			+	'<b>' + note.name + '<a href="/profile/' + note.username + '">@' + note.username + '</a></b><br>'
-			+	'<div class="noteMsg">' + addMsgHTML(msg, note.ques) + '<br> </div>'
+			+	'<div class="noteMsg">' + addMsgHTML(msg, note.ques, note.convo) + '<br> </div>'
 			+	'<div class="noteDetails">'
 			+	note.date + ' | <a href="/course/' + note.cid + '">' + note.code + '</a> | <a href="#">Detail</a> | <a href="#">Reply</a>'
 			+ 	'| <a class="delete" id="' + note.nid + '" href=>Delete</a>'
@@ -12,9 +12,9 @@ function addNoteHTML (note) {
 	return content;
 }
 
-function addMsgHTML (msg, ques) {
+function addMsgHTML (msg, ques, convo) {
 	var content = '';
-	if (ques) {
+	if ((ques == true) && (convo == null)) {
 		content += '<font color = "red">';
 	} else {
 		content += '<font color = "black">';

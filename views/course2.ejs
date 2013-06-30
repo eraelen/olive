@@ -26,7 +26,7 @@
 				<textarea name="<%= courseCID %>_<%= lectureLID %>" class="form-textarea-size" > </textarea>
 				<br>
 				<label><input type="checkbox" id="question" value="question" /> This is a question </label>
-				<input type="submit" class="noteSubmit" name="submit" value="Submit" style="float:right; margin-right:20px"/>
+				<input type="submit" id="noteSubmit" name="submit" value="Submit" style="float:right; margin-right:20px"/>
 			</form>
 		</div>
 		<div id="noteList">
@@ -34,7 +34,7 @@
 				<div class="note" id="nid_<%= notes[i].nid %>">
 					<b><%= notes[i].name %> <a href="/profile/<%= notes[i].username %>">@<%= notes[i].username %></a></b><br>
 					<div class="noteMsg">
-						<% if ((notes[i].ques == true) && (notes[i].convo == null)){ %>
+						<% if ((notes[i].ques === true) && (notes[i].convo === null)){ %>
 							<font color="red">
 						<% } else { %>
 							<font color = "black">
@@ -64,15 +64,17 @@
 							<div class="modal-body">
 								<p>This will be original note</p>
 								<hr>
-								<form method="post" id="compose" action="">
-									<textarea id="replyNote" name="<%= courseCID %>_<%= lectureLID %>_<%= notes[i].nid %>" class="form-textarea-size" > </textarea>
-									<br>
-									<label><input type="checkbox" id="replyQuestion" value="question" /> This is a question </label>
-								</form>
+								<div id="composeNote">
+									<form method="post" id="compose" action="/createNote">
+										<textarea id="notemsg" name="<%= courseCID %>_<%= lectureLID %>" class="form-textarea-size" > </textarea>
+										<br>
+										<label><input type="checkbox" id="question" value="question" /> This is a question </label>
+									</form>
+								</div>
 							</div>
 							<div class="modal-footer">
 								<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-								<button class="btn btn-primary" id="replySubmit" name="submit" value="Submit" form="compose">Submit</button>
+								<button class="btn btn-primary" id="noteSubmit" name="submit" value="Submit" form="compose">Submit</button>
 							</div>
 						</div>
 						<% if (loggedInUser === notes[i].username) { %>
@@ -85,14 +87,10 @@
 	</div>
 </div>
 
-
-
-
 <script src="/javascripts/notes.js"> </script>
 <script>
 	deleteN();
 	createN();
-	createReply();
 </script>
 
 <% include footer %>
