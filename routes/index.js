@@ -140,6 +140,7 @@ exports.createNote = function(req, res) {
 		console.log("msg - " + req.body.msg);
 		console.log("cid - " + req.body.cid);
 		console.log("ques - " + (req.body.ques === "true"));
+		console.log("reply - " + req.body.reply);
 		var newNote = notes.createNote(loggedInUser.uid, req.body.msg, parseInt(req.body.cid), (req.body.ques === "true"), req.body.reply);
 		console.log("convo - " + newNote.convo);
 		console.log("test - " + ((newNote.ques === true) && (newNote.convo === null)));

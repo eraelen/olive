@@ -53,7 +53,7 @@
 						<br>
 					</div>
 					<div class="noteDetails">
-						<%= notes[i].date %> | <a class="codeTag" name="<notes[i].code" href="/course/<%= notes[i].cid %>"><%= notes[i].code %></a> | <a href="#">Detail</a> 
+						<%= notes[i].date %> | <a class="codeTag" title="<%= notes[i].semester %> - <%= notes[i].code %>" href="/course/<%= notes[i].cid %>"><%= notes[i].code %></a> | <a href="#">Detail</a> 
 						| <a data-toggle="modal" data-target="#replyModal">Reply</a>
 						<!-- Modal -->
 						<div id="replyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
