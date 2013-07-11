@@ -53,9 +53,45 @@
 						<br>
 					</div>
 					<div class="noteDetails">
-						<%= notes[i].date %> | <a class="codeTag" title="<%= notes[i].semester %> - <%= notes[i].code %>" href="/course/<%= notes[i].cid %>"><%= notes[i].code %></a> | <a href="#">Detail</a> 
+						<%= notes[i].date %> | <a class="codeTag" title="<%= notes[i].semester %> - <%= notes[i].code %>" href="/course/<%= notes[i].cid %>"><%= notes[i].code %></a> 
+						| <a data-toggle="modal" data-target="#detailModal">Detail</a> 
+						<!-- Detail Modal -->
+						<div id="detailModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<h3 id="myModalLabel">Detail</h3>
+							</div>
+							<div class="modal-body">
+								<p>
+									This is the detail body.					
+								</p>
+								<hr>
+								<div class="noteMsg">
+									<% if ((notes[i].ques == true) && (notes[i].convo == null)){ %>
+										<font color="red">
+									<% } else { %>
+										<font color = "black">
+									<% } %>
+									<% var msg = notes[i].message %><% msg = msg.split(" ") %>
+									<% for (var j=0; j < msg.length; j++) { %>
+										<% if (msg[j].charAt(0) === "@" && msg[j].split("\@").length === 2) { var word = msg[j].substring(1); %>
+											<a href="/profile/<%= word %>"> <%= msg[j] %></a> 
+										<% } else if (msg[j].charAt(0) === "#" && msg[j].split("\#").length === 2) { var word = msg[j].substring(1); %>
+											<a href="/searchN/<%= word %>"> <%= msg[j] %></a> 
+										<% } else { %>
+											<%= msg[j] %>
+										<% } %>
+									<% } %>
+									</font>
+									<br>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">Dismiss</button>
+							</div>
+						</div>
 						| <a data-toggle="modal" data-target="#replyModal">Reply</a>
-						<!-- Modal -->
+						<!-- Reply Modal -->
 						<div id="replyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
